@@ -1,4 +1,4 @@
-<?php 
+<?php
 /*
  - isset
  変数が定義されていて、null以外の値の時にtrueを返す。
@@ -17,3 +17,19 @@
 
 $a = 0;
 $b = 1;
+
+if (isset($b)) {
+    echo "true";
+} else {
+    echo "false";
+}
+?>
+
+<br>
+
+<?php
+if (empty($b)) {
+    echo "true";
+} else {
+    echo "false";
+}
