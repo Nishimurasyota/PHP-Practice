@@ -14,6 +14,7 @@ print_r($arr);
 ?>
 
 <br>
+<br>
 
 <?php
 
@@ -23,6 +24,7 @@ echo $arr[1];
 ?>
 
 <br>
+<br>
 
 <?php
 
@@ -31,10 +33,15 @@ $array = ["nagomi", "ayako", "aki", "shiho"];
 for ($i = 0; $i < count($array); $i++) {
     echo '<div>', $arr[$i], '<div>';
 }
-
 //count()で配列の中の要素の数を取り出している
 // for分では初期値を決めて、その値が条件式に当てはまる場合は実行
 // その後更新を行い更新後の値を条件式に当てはめて、、、というように条件に当てはまる間は実行と更新を行う
+
+?>
+
+<br>
+
+<?php
 
 foreach ($array as $a) {
     echo '<div>', $a, '</div>';
