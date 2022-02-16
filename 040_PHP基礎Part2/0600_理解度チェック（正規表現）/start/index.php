@@ -29,6 +29,15 @@
  * 124-56789 -> NG
  */
 
+$zipcode = "001-0012";
+if (preg_match("/^\d{3}-\d{4}$/", $zipcode)) {
+    //{"/^\d{3}-\d{4}$/"}とすることで前半3文字と後半4文字と指定することができる
+    //^ $がないと文字数の指定ができないので正しい検索ができない
+    echo "正常です";
+} else {
+    echo "不正です";
+}
+
 
 /**
  * Email
@@ -40,8 +49,30 @@
  * example/0.00@ex.co.jp -> NG
  */
 
+$email = "example/0.00@ex.co.jp";
+if (preg_match("/^[\w.\-]+@[\w.\-]+\.[\w\.\-]+$/", $email)) {
+    echo "正常です";
+} else {
+    echo "不正です";
+}
 
 /**
  * HTML
  * 見出しタグ(h1~h6)の中身のみ取得してみよう。
  */
+
+$html = '<!DOCTYPE html>
+<html>
+<head>
+    <title>Document</title>
+</head>
+<body>
+    <h1>見出し１</h1>
+    <h2>見出し２</h2>
+    <h3>見出し３</h3>
+    <header>ヘッダー</header>
+</body>
+</html>';
+if (preg_match_all("/<h[1-6]>(.+)<\/h[1-6]>/", $html, $res)) {
+    print_r($res);
+}
