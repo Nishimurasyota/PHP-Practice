@@ -1,1 +1,1 @@
-<?php
+<h1>file2 is required</h1>
