@@ -1,4 +1,5 @@
 <?php
+
 /**
  * クラス内のthis
  */
@@ -13,19 +14,26 @@ class Person
         $this->age = $age;
     }
 
-    function hello() {
+    function hello()
+    {
         echo 'hello, ' . $this->name;
         return $this;
     }
 
-    function bye() {
-        echo 'bye, ' . $this->name;
-        return $this;
+    static function bye()
+    {
+        echo 'bye';
     }
+    //    static 静的メソッドではthisを使用できない
+    //    staticはクラスに登録されるため、thisの所在がわからない
+    //    クラス内でstaticメソッドを使用する場合は[static::メソッド名, self::メソッド名]とする
 }
 
 $bob = new Person('Bob', 18);
-$bob->hello()->bye();
+Person::bye();
+    //    staticメソッドを呼び出すときはクラス名::で呼び出すことが多い
+
+//$bob->hello()->bye();
 
 // $tim = new Person('Tim', 32);
 // $tim->hello();
