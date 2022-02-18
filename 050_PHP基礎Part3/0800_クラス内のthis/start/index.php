@@ -1,7 +1,7 @@
-<?php 
+<?php
 class Person
 {
-    private $name;
+    public $name;
     public $age;
 
     function __construct($name, $age)
@@ -10,10 +10,23 @@ class Person
         $this->age = $age;
     }
 
-    function hello() {
-        echo 'hello, ' . $this->name;
+    function hello()
+    {
+        echo 'hello, ' . $this->name . ', ';
+        return $this;
+    }
+
+    function bye()
+    {
+        echo 'bye, ' . $this->name;
+        return $this;
     }
 }
 
 $bob = new Person('Bob', 18);
-$bob->hello();
+//$bob->hello();
+//returnで$thisが返却されるのでbobオブジェクトが返却されるのと同じになる
+//ということは【$bob->$bob】ということになるので
+$bob->hello()->bye();
+//さらにメソッドを繋げることも可能、これをチェーンメソッドという
+//この場合の出力結果は【hello, Bob, bye, Bob】
