@@ -1,4 +1,11 @@
-<?php 
+<?php
+
+//GETはデータの取得に使われることが多い
+//URLが最大で2000文字程度までしか設定できないため、URLにパラメーターを設定するGETは向かない
+//GETはURLにパラメーターの情報を持つことができる
+//POSTはデータの作成や更新に使用
+//POSTのbodyにパラメーターを設定する
+
 $students = [
     '1' => [
         'name' => 'taro',
@@ -14,7 +21,7 @@ $students = [
     ],
 ];
 
-$id = $_GET['id'];
+$id = $_GET['id'] ?? 1;
 $student = $students[$id];
 $name = $student['name'];
 $age = $student['age'];
