@@ -13,8 +13,11 @@
 RewriteEngine on
 # RewriteRule rewrite-test/index.html /apache/rewrite-test/tmp.html
 # redirectの時と違いサーバー側で擬似的に処理をするのでクライアント側でURLが変わることはない
-RewriteBase /apache/rewrite-test/
+# RewriteBase /apache/rewrite-test/
 # 以下の記載をする場合、/apache/rewrite-test/のパスの記載を省略する
-RewriteRule rewrite-test/imgs/150.jpg imgs/150.png
+# RewriteRule rewrite-test/imgs/150.jpg imgs/150.png
 # /apache/rewrite-test/imgs/150.pngと記述するとこをRewriteBaseで省略している
-RewriteRule rewrite-test/sub1 /apache/rewrite-test/sub2/
+# RewriteRule rewrite-test/sub1 /apache/rewrite-test/sub2/
+RewriteRule rewrite-test/sub1(.+\.html) /apache/rewrite-test/sub2/$1
+
+RewriteRule rewrite-test/imgs/(\d{3}).jpg imgs/$1.png
