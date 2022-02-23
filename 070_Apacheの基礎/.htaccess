@@ -18,6 +18,6 @@ RewriteEngine on
 # RewriteRule rewrite-test/imgs/150.jpg imgs/150.png
 # /apache/rewrite-test/imgs/150.pngと記述するとこをRewriteBaseで省略している
 # RewriteRule rewrite-test/sub1 /apache/rewrite-test/sub2/
-RewriteRule rewrite-test/sub1(.+\.html) /apache/rewrite-test/sub2/$1
-
+RewriteRule rewrite-test/sub1/(.+\.html) /apache/rewrite-test/sub2/$1
 RewriteRule rewrite-test/imgs/(\d{3}).jpg imgs/$1.png
+# ()で後方参照を行い、(\d{3})で数値3文字と指定、$1で表現んしている
