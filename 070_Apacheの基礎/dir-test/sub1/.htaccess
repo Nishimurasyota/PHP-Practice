@@ -1,1 +1,3 @@
-# Options +Indexes
+# /Applications/MAMP/htdocs/PHP/PHP-Practice/070_Apacheの基礎/dir-test/sub1
+# にアクセスした時の動作
+Options +indexes

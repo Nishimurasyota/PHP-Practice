@@ -1,1 +1,5 @@
-# DirectoryIndex file2.html
+# /Applications/MAMP/htdocs/PHP/PHP-Practice/070_Apacheの基礎/dir-test/
+# にアクセスした時の動作
+
+DirectoryIndex file2.html
+Options +indexes
