@@ -1,0 +1,11 @@
+DirectoryIndex file3.html
+
+
+# Redirect /apache/redirect-test /apache
+# URLで/apache/redirect-testを指定すると/apacheに転送する
+# 転送後、DirectoryIndex file3.htmlの処理が走りfile3.htmlの処理が実行される
+
+Redirect 301 /apache/file1 /apache/dir-test/file1.html
+
+# 302はサーバーの設定が即時反映されるが
+# 301は設定を変更してもキャッシュの情報などからredirect先の情報を取ってくる
