@@ -31,6 +31,9 @@ RewriteEngine on
 # RewriteRule rewrite-test/sub1 sub1/%1?
 
 # .htmlで来たリクエストを同じファイル名のphpに転送する
-RewriteBase /apache/
-RewriteRule /?(.+)\.html$ $1.php
+# RewriteBase /apache/
+# RewriteRule /?(.+)\.html$ $1.php
 # .html$でhtmlで終わる場合と指定している、$がない場合はhtml移行が続いても一致する
+# AddType image/webp .webp
+RewriteCond /Applications/MAMP/htdocs/PHP/PHP-Practice/070_Apacheの基礎/rewrite-test/imgs/$1.webp -f
+RewriteRule /?imgs/(.*)\.(jpe?g|png) imgs/$1.webp
