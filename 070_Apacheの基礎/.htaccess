@@ -34,6 +34,16 @@ RewriteEngine on
 # RewriteBase /apache/
 # RewriteRule /?(.+)\.html$ $1.php
 # .html$でhtmlで終わる場合と指定している、$がない場合はhtml移行が続いても一致する
+
 # AddType image/webp .webp
-RewriteCond /Applications/MAMP/htdocs/PHP/PHP-Practice/070_Apacheの基礎/rewrite-test/imgs/$1.webp -f
-RewriteRule /?imgs/(.*)\.(jpe?g|png) imgs/$1.webp
+# RewriteCond /Applications/MAMP/htdocs/PHP/PHP-Practice/070_Apacheの基礎/rewrite-test/imgs/$1.webp -f
+# RewriteRule /?imgs/(.*)\.(jpe?g|png) imgs/$1.webp
+
+# www.dev.localでリクエストが来た場合、dev.localで返す
+RewriteCond %{HTTP_HOST} ^www\.dev\.local
+RewriteRule .? http://dev.local%{REQUEST_URI} [R=301]
+
+
+RewriteCond %{HTTP_HOST} ^vhost\.dev\.local [NC]
+RewriteCond %{REQUEST_URI} !^/apache/rewrite-test/vhost/
+RewriteRule (.*) vhost/$1
