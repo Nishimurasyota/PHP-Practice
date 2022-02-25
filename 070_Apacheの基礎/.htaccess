@@ -10,7 +10,7 @@
 # 302はサーバーの設定が即時反映されるが
 # 301は設定を変更してもキャッシュの情報などからredirect先の情報を取ってくる
 
-RewriteEngine on
+# RewriteEngine on
 # RewriteRule rewrite-test/index.html /apache/rewrite-test/tmp.html
 # redirectの時と違いサーバー側で擬似的に処理をするのでクライアント側でURLが変わることはない
 # RewriteBase /apache/rewrite-test/
@@ -40,10 +40,15 @@ RewriteEngine on
 # RewriteRule /?imgs/(.*)\.(jpe?g|png) imgs/$1.webp
 
 # www.dev.localでリクエストが来た場合、dev.localで返す
-RewriteCond %{HTTP_HOST} ^www\.dev\.local
-RewriteRule .? http://dev.local%{REQUEST_URI} [R=301]
+# RewriteCond %{HTTP_HOST} ^www\.dev\.local
+# RewriteRule .? http://dev.local%{REQUEST_URI} [R=301]
 
 
-RewriteCond %{HTTP_HOST} ^vhost\.dev\.local [NC]
-RewriteCond %{REQUEST_URI} !^/apache/rewrite-test/vhost/
-RewriteRule (.*) vhost/$1
+# RewriteCond %{HTTP_HOST} ^vhost\.dev\.local [NC]
+# RewriteCond %{REQUEST_URI} !^/apache/rewrite-test/vhost/
+# RewriteRule (.*) vhost/$1
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript
+    # AddOutputFilterByType以降に記載のあるファイル形式がリクエストされた場合、gzipで返却する
+</IfModule>
