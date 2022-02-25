@@ -48,7 +48,10 @@
 # RewriteCond %{REQUEST_URI} !^/apache/rewrite-test/vhost/
 # RewriteRule (.*) vhost/$1
 
-<IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript
-    # AddOutputFilterByType以降に記載のあるファイル形式がリクエストされた場合、gzipで返却する
-</IfModule>
+# <IfModule mod_deflate.c>
+#     AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript
+#     # AddOutputFilterByType以降に記載のあるファイル形式がリクエストされた場合、gzipで返却する
+# </IfModule>
+
+# INode、更新日時、ファイルサイズを使用
+# FileETag All
