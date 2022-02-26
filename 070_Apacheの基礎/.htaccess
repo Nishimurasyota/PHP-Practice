@@ -61,5 +61,8 @@
   <FilesMatch "\.(png|jpe?g|gif|css|js|html)$">
     ExpiresDefault "access plus 2 week"
     # accessはアクセスからの日数、modificationは更新してからの日数
+    # キャッシュの期間は長めに設定するのが基本だが、キャッシュが効いているとファイルの編集が反映されないケースがある
+    # だからファイル名を変更することで新しいコンテンツとして取りに来るようにする
+    # main.js?v2→main.js?v3のように
   </FilesMatch>
 </IfModule>
