@@ -55,3 +55,11 @@
 
 # INode、更新日時、ファイルサイズを使用
 # FileETag All
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  <FilesMatch "\.(png|jpe?g|gif|css|js|html)$">
+    ExpiresDefault "access plus 2 week"
+    # accessはアクセスからの日数、modificationは更新してからの日数
+  </FilesMatch>
+</IfModule>

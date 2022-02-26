@@ -10,6 +10,7 @@
   ExpiresActive On
   <FilesMatch "\.(png|jpe?g|gif|css|js|html)$">
     ExpiresDefault "access plus 2 week"
+    # accessはアクセスからの日数、modificationは更新してからの日数
   </FilesMatch>
 </IfModule>
 
