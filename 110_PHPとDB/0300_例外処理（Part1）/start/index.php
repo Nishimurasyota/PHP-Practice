@@ -2,7 +2,7 @@
 
 try {
 
-    new PDO('', '', '');
+    // new PDO('', '', '');
 
     $bool = false;
     $bool->method();
