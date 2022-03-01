@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Prepared Statement
 ?>
 
@@ -7,9 +7,9 @@
     <input type="submit" value="検索">
 </form>
 
-<?php 
-if(isset($_POST['shop_id'])) {
-    
+<?php
+if (isset($_POST['shop_id'])) {
+
     $shop_id = $_POST['shop_id'];
 
     $user = 'test_user';
@@ -20,14 +20,17 @@ if(isset($_POST['shop_id'])) {
     $conn = new PDO($dsn, $user, $pwd);
     $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    
+    $conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+    // PDO::ATTR_EMULATE_PREPARES, falseとすることでPDOのプリペアードステートメントを使用しないようにしている
+
     $pst = $conn->prepare("select * from test_phpdb.mst_shops where id = :id;");
     $pst->bindValue(':id', $shop_id, PDO::PARAM_INT);
+    // 渡ってくる値に対して厳格に型指定をする場合はbindValueを使用する
     $pst->execute();
     $result = $pst->fetch();
 
-    if(count($result) > 0) {
+    if (count($result) > 0) {
         echo "店舗名は[{$result['name']}]です。";
     }
 }
- ?>
+?>
