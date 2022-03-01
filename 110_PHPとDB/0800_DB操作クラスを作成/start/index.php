@@ -8,27 +8,20 @@
 </form>
 
 <?php
+
+require_once "datasource.php";
+
+use db\DataSource;
+
 if (isset($_POST['shop_id'])) {
     try {
 
         $shop_id = $_POST['shop_id'];
 
-        $user = 'test_user';
-        $pwd = 'pwd';
-        $host = 'localhost';
-        $dbName = 'test_phpdb';
-        $dsn = "mysql:host={$host};port=8889;dbname={$dbName};";
-        $conn = new PDO($dsn, $user, $pwd);
-        $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-
-        $pst = $conn->prepare("select * from test_phpdb.mst_shops where id = :id;");
-        // $pst->bindValue(':id', $shop_id, PDO::PARAM_STR);
-        $pst->execute([
+        $db = new DataSource();
+        $result = $db->selectOne("select * from test_phpdb.mst_shops where id = :id;", [
             ':id' => $shop_id
         ]);
-        $result = $pst->fetch();
 
         if (!empty($result) && count($result) > 0) {
             echo "店舗名は[{$result['name']}]です。";
