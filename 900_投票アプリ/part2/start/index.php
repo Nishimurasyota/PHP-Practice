@@ -8,14 +8,11 @@ require_once SOURCE_BASE . 'model/user.model.php';
 require_once SOURCE_BASE . 'db/datasource.php';
 require_once SOURCE_BASE . 'db/user.query.php';
 
-use  db\UserQuery;
+session_start();
 
-// $result = UserQuery::fetchById("test");
-// var_dump($result);
+require_once SOURCE_BASE . 'partials/header.php';
 
-// require_once SOURCE_BASE . 'partials/header.php';
-
-$rpath = str_replace(BASE_CONTEXT_PATH, '', $_SERVER['REQUEST_URI']);
+$rpath = str_replace(BASE_CONTEXT_PATH, '', CURRENT_URI);
 $method = strtolower($_SERVER['REQUEST_METHOD']);
 
 route($rpath, $method);
