@@ -26,4 +26,18 @@ abstract class AbstractModel
     {
         static::setSession(null);
     }
+
+    /**
+     * sessionの取得と削除を行う関数
+     *
+     * @return void
+     */
+    public static function getSessionAndFlush()
+    {
+        try {
+            return static::getSession();
+        } finally {
+            static::clearSession();
+        }
+    }
 }
