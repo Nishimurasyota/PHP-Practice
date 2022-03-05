@@ -25,18 +25,18 @@ class UserQuery
      * @param [type] $nickname
      * @return void
      */
-    public static function insert($id, $pwd, $nickname)
+    public static function insert($user)
     {
         $db = new DataSource();
         $sql = "insert into users(id,pwd,nickname) value(:id,:pwd,:nickname)";
 
-        $pwd = password_hash($pwd, PASSWORD_BCRYPT);
+        $pwd = password_hash($user->pwd, PASSWORD_BCRYPT);
         // pwdのハッシュ化、第一引数でハッシュ化したいpass、第二引数で何を使用してハッシュ化するか指定する
 
         return $db->execute($sql, [
-            ":id" => $id,
-            ":pwd" => $pwd,
-            ":nickname" => $nickname
+            ":id" => $user->id,
+            ":pwd" => $user->pwd,
+            ":nickname" => $user->nickname
         ]);
     }
 }
