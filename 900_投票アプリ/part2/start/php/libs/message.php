@@ -3,6 +3,7 @@
 namespace lib;
 
 use model\AbstractModel;
+use Throwable;
 
 class Msg extends AbstractModel
 {
@@ -26,19 +27,26 @@ class Msg extends AbstractModel
 
     public static function flush()
     {
-        $msg_with_type = static::getSessionAndFlush() ?? [];
+        try {
 
-        foreach ($msg_with_type as $type => $msgs) {
-            // $typeにはstatic::ERROR(INFO,DEBUG)が渡ってきて、msgsには[]が渡ってくる
+            $msg_with_type = static::getSessionAndFlush() ?? [];
 
-            // $typeでDEBUGが回ってきて、DEBUGがfalseの場合、次のループを実行する
-            if ($type === static::DEBUG && !DEBUG) {
-                continue;
+            foreach ($msg_with_type as $type => $msgs) {
+                // $typeにはstatic::ERROR(INFO,DEBUG)が渡ってきて、msgsには[]が渡ってくる
+
+                // $typeでDEBUGが回ってきて、DEBUGがfalseの場合、次のループを実行する
+                if ($type === static::DEBUG && !DEBUG) {
+                    continue;
+                }
+
+                foreach ($msgs as $msg) {
+                    echo "<div>{$type}:{$msg}</div>";
+                }
             }
+        } catch (Throwable $e) {
 
-            foreach ($msgs as $msg) {
-                echo "<div>{$type}:{$msg}</div>";
-            }
+            Msg::push(Msg::DEBUG, $e->getMessage());
+            Msg::push(Msg::DEBUG, "Msg::Flushで例外が発生しました");
         }
     }
 

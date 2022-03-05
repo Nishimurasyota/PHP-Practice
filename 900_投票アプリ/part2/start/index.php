@@ -4,6 +4,7 @@ require_once 'config.php';
 //Library
 require_once SOURCE_BASE . 'libs/helper.php';
 require_once SOURCE_BASE . 'libs/auth.php';
+require_once SOURCE_BASE . 'libs/router.php';
 
 
 //MOdel
@@ -17,34 +18,22 @@ require_once SOURCE_BASE . 'libs/message.php';
 require_once SOURCE_BASE . 'db/datasource.php';
 require_once SOURCE_BASE . 'db/user.query.php';
 
+use function lib\route;
+
 session_start();
 
-require_once SOURCE_BASE . 'partials/header.php';
+try {
 
-$rpath = str_replace(BASE_CONTEXT_PATH, '', CURRENT_URI);
-$method = strtolower($_SERVER['REQUEST_METHOD']);
+    require_once SOURCE_BASE . 'partials/header.php';
 
-route($rpath, $method);
+    $rpath = str_replace(BASE_CONTEXT_PATH, '', CURRENT_URI);
+    $method = strtolower($_SERVER['REQUEST_METHOD']);
 
-function route($rpath, $method)
-{
-    if ($rpath === '') {
-        $rpath = 'home';
-    }
-
-    $targetFile = SOURCE_BASE . "controllers/{$rpath}.php";
-
-    if (!file_exists($targetFile)) {
-        require_once SOURCE_BASE . "views/404.php";
-        return;
-    }
-
-    require_once $targetFile;
-
-    $fn = "\\controller\\{$rpath}\\{$method}";
-
-    $fn();
+    route($rpath, $method);
+} catch (Throwable $e) {
+    die("<div>何かがおかしいようです。</div>");
 }
+
 
 
 
