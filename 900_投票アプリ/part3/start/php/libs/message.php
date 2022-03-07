@@ -1,18 +1,21 @@
-<?php 
+<?php
+
 namespace lib;
 
 use model\AbstractModel;
 use Throwable;
 
-class Msg extends AbstractModel {
+class Msg extends AbstractModel
+{
     protected static $SESSION_NAME = '_msg';
     public const ERROR = 'error';
     public const INFO = 'info';
     public const DEBUG = 'debug';
 
-    public static function push($type, $msg) {
+    public static function push($type, $msg)
+    {
 
-        if(!is_array(static::getSession())) {
+        if (!is_array(static::getSession())) {
             static::init();
         }
 
@@ -21,36 +24,42 @@ class Msg extends AbstractModel {
         static::setSession($msgs);
     }
 
-    public static function flush() {
+    public static function flush()
+    {
         try {
 
             $msgs_with_type = static::getSessionAndFlush() ?? [];
 
-            foreach($msgs_with_type as $type => $msgs) {
-                if($type === static::DEBUG && !DEBUG) {
+
+            echo "<div id='message'>";
+
+            foreach ($msgs_with_type as $type => $msgs) {
+                if ($type === static::DEBUG && !DEBUG) {
                     continue;
                 }
-    
-                foreach($msgs as $msg) {
-                    echo "<div>{$type}:{$msg}</div>";
+
+                // INFOかどうかでアラートの背景色を変更する
+                $color = $type === static::INFO ? "alert-info" : "alert-danger";
+
+                foreach ($msgs as $msg) {
+                    echo "<div class='alert $color'>{$msg}</div>";
                 }
             }
-
+            echo "</div>";
         } catch (Throwable $e) {
 
             Msg::push(Msg::DEBUG, $e->getMessage());
             Msg::push(Msg::DEBUG, 'Msg::Flushで例外が発生しました。');
-            
         }
     }
 
-    private static function init() {
+    private static function init()
+    {
 
         static::setSession([
             static::ERROR => [],
             static::INFO => [],
             static::DEBUG => []
         ]);
-        
     }
 }

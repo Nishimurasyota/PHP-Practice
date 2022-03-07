@@ -25,6 +25,7 @@ require_once SOURCE_BASE . 'partials/footer.php';
 
 //view
 require_once SOURCE_BASE . 'views/login.php';
+require_once SOURCE_BASE . 'views/register.php';
 
 use function lib\route;
 
