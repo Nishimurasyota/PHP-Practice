@@ -1,7 +1,12 @@
 <?php
 
+namespace partials;
+
 use lib\Auth;
 use lib\Msg;
+
+function header()
+{
 ?>
 
 <!DOCTYPE html>
@@ -37,4 +42,6 @@ use lib\Msg;
             </nav>
         </header>
         <main class="container py-3">
-            <?php Msg::flush(); ?>
+            <?php
+            Msg::flush();
+        } ?>
