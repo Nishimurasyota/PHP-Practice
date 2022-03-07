@@ -13,6 +13,9 @@ class Auth
     {
 
         try {
+            if (!(UserModel::validateId($id) * UserModel::validatePwd($pwd))) {
+                return false;
+            }
             $is_success = false;
 
             $user = UserQuery::fetchById("$id");
@@ -40,6 +43,9 @@ class Auth
     public static function regist($user)
     {
         try {
+            if (!($user->isValidId()  * $user->isValidPwd() * $user->isValidNickname())) {
+                return false;
+            }
             $is_success = false;
             $exist_user = UserQuery::fetchById($user->id);
 
@@ -82,5 +88,16 @@ class Auth
         } else {
             return false;
         }
+    }
+
+    public static function logout()
+    {
+        try {
+            UserModel::clearSession();
+        } catch (Throwable $e) {
+            Msg::push(Msg::DEBUG, $e->getMessage());
+            return false;
+        }
+        return true;
     }
 }
