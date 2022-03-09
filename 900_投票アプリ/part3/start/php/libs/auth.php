@@ -58,7 +58,6 @@ class Auth
 
                 Msg::push(Msg::ERROR, 'ユーザーがすでに存在します。');
                 return false;
-
             }
 
             $is_success = UserQuery::insert($user);
@@ -66,9 +65,7 @@ class Auth
             if ($is_success) {
 
                 UserModel::setSession($user);
-
             }
-
         } catch (Throwable $e) {
 
             $is_success = false;
@@ -96,21 +93,27 @@ class Auth
         } else {
             return false;
         }
-        
     }
 
-    public static function logout() {
+    public static function logout()
+    {
         try {
-            
-            UserModel::clearSession();
 
+            UserModel::clearSession();
         } catch (Throwable $e) {
 
             Msg::push(Msg::DEBUG, $e->getMessage());
             return false;
-
         }
 
         return true;
+    }
+
+    public static function requireLogin()
+    {
+        if (!static::isLogin()) {
+            Msg::push(Msg::ERROR, "ログインしてください");
+            redirect("login");
+        }
     }
 }
