@@ -13,7 +13,7 @@ function topic_list_item($topic, $title_url, $with_status)
                 <?php if ($with_status) : ?>
                     <span class="badge mr-1 align-bottom <?php echo $published_cls; ?> "><?php echo $published_label; ?></span>
                 <?php endif; ?>
-                <a class="text-body" href="<? echo $title_url; ?>"><?php echo $topic->title; ?></a>
+                <a class="text-body" href="<?php echo $title_url; ?>"><?php echo $topic->title; ?></a>
             </h2>
         </div>
         <div class="col-auto mx-auto">
