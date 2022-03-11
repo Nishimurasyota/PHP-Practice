@@ -123,4 +123,18 @@ class TopicQuery
             ':published' => $topic->published,
                     ]);
     }
+
+    public static function insert($topic, $user)
+    {
+
+        $db = new DataSource;
+        $sql = 'insert into topics(user_id, title, published) value(:user_id, :title, :published)' ;
+
+        return $db->execute($sql, [
+            ':user_id' => $user->id,
+            ':title' => $topic->title,
+            ':published' => $topic->published,
+                    ]);
+    }
+
 }
