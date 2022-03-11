@@ -11,10 +11,13 @@ function get() {
     $topic = new TopicModel;
     $topic->id = get_param('topic_id', null, false);
 
+    TopicQuery::incrementViewCount($topic);
+
     $fetchedTopic = TopicQuery::fetchById($topic);
     $comments = CommentQuery::fetchByTopicId($topic);
 
-    if(!$fetchedTopic) {
+    if(empty($fetchedTopic) || !$fetchedTopic->published) {
+        // $fetchedTopicが空もしくはpublishedの値がfalseの場合、以下の文章を実行する
         Msg::push(Msg::ERROR, 'トピックが見つかりません。');
         redirect('404');
     }
