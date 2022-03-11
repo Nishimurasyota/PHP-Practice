@@ -115,38 +115,58 @@ class TopicQuery
     {
 
         if (!($topic->isValidId()
-        * $topic->isValidTitle()
-        * $topic->isValidPublished())) {
-        return false;
+            * $topic->isValidTitle()
+            * $topic->isValidPublished())) {
+            return false;
         }
 
         $db = new DataSource;
-        $sql = 'update topics set published = :published , title = :title where id = :id' ;
+        $sql = 'update topics set published = :published , title = :title where id = :id';
 
         return $db->execute($sql, [
             ':id' => $topic->id,
             ':title' => $topic->title,
             ':published' => $topic->published,
-                    ]);
+        ]);
     }
 
     public static function insert($topic, $user)
     {
 
         if (!($user->isValidId()
-        * $topic->isValidTitle()
-        * $topic->isValidPublished())) {
-        return false;
+            * $topic->isValidTitle()
+            * $topic->isValidPublished())) {
+            return false;
         }
 
         $db = new DataSource;
-        $sql = 'insert into topics(user_id, title, published) value(:user_id, :title, :published)' ;
+        $sql = 'insert into topics(user_id, title, published) value(:user_id, :title, :published)';
 
         return $db->execute($sql, [
             ':user_id' => $user->id,
             ':title' => $topic->title,
             ':published' => $topic->published,
-                    ]);
+        ]);
     }
 
+    public static function incrementLikesOrDislikes($comment)
+    {
+
+        if (!($comment->isValidTopicId()
+            * $comment->isValidAgree())) {
+            return false;
+        }
+
+        $db = new DataSource;
+
+        if ($comment->agree) {
+            $sql = 'update topics set likes = likes + 1 where id = :topic_id';
+        } else {
+            $sql = 'update topics set dislikes = dislikes + 1 where id = :topic_id';
+        }
+
+        return $db->execute($sql, [
+            ':topic_id' => $comment->topic_id,
+        ]);
+    }
 }
