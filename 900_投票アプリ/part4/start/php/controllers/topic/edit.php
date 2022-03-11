@@ -13,6 +13,13 @@ function get()
 {
     Auth::requireLogin();
 
+    $topic = TopicModel::getSessionAndFlush();
+
+    // $topicがある場合、{}の処理を実行する
+    if (!empty($topic)) {
+        \view\topic\edit\index($topic, true);
+        return;
+    }
     $topic = new TopicModel;
     $topic->id = get_param("topic_id", null, false);
 
@@ -20,6 +27,7 @@ function get()
     Auth::requirePermission($topic->id, $user);
 
     $fetchedTopic = TopicQuery::fetchById($topic);
+
     \view\topic\edit\index($fetchedTopic, true);
 }
 
@@ -39,14 +47,15 @@ function post()
         $is_success = TopicQuery::update($topic);
     } catch (Throwable $e) {
         Msg::push(Msg::DEBUG, $e->getMessage());
-        $is_success =false;
+        $is_success = false;
     }
 
     if ($is_success) {
         Msg::push(Msg::INFO, "トピックの更新に成功しました");
         redirect("topic/archive");
-    }else{
+    } else {
         Msg::push(Msg::ERROR, "トピックの更新に失敗しました");
+        TopicModel::setSession($topic);
         redirect(GO_REFERER);
     }
 }

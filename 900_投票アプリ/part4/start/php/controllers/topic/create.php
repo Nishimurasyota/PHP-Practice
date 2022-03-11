@@ -13,10 +13,15 @@ function get()
 {
     Auth::requireLogin();
 
-    $topic = new TopicModel;
-    $topic->id = -1;
-    $topic->title = "";
-    $topic->published = 1;
+    $topic = TopicModel::getSessionAndFlush();
+    // エラーが起きてsessionに保存されたデータがある場合、変数に格納してsessionをクリアにする
+
+    if (empty($topic)) {
+        $topic = new TopicModel;
+        $topic->id = -1;
+        $topic->title = "";
+        $topic->published = 1;
+    }
 
     \view\topic\edit\index($topic, false);
 }
@@ -43,6 +48,8 @@ function post()
         redirect("topic/archive");
     } else {
         Msg::push(Msg::ERROR, "トピックの登録に失敗しました");
+        TopicModel::setSession($topic);
+        // エラーが起きた時の情報をsession2保存する
         redirect(GO_REFERER);
     }
 }
