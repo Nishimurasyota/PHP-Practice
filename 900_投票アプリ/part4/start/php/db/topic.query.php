@@ -114,6 +114,12 @@ class TopicQuery
     public static function update($topic)
     {
 
+        if (!($topic->isValidId()
+        * $topic->isValidTitle()
+        * $topic->isValidPublished())) {
+        return false;
+        }
+
         $db = new DataSource;
         $sql = 'update topics set published = :published , title = :title where id = :id' ;
 
@@ -126,6 +132,12 @@ class TopicQuery
 
     public static function insert($topic, $user)
     {
+
+        if (!($user->isValidId()
+        * $topic->isValidTitle()
+        * $topic->isValidPublished())) {
+        return false;
+        }
 
         $db = new DataSource;
         $sql = 'insert into topics(user_id, title, published) value(:user_id, :title, :published)' ;
