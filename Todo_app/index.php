@@ -1,3 +1,7 @@
+<?php
+require_once "config.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,5 +12,4 @@
 </head>
 <body>
     <h1>Index</h1>
-</body>
 </html>
