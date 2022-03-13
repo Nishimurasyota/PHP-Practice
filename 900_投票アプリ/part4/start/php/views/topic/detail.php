@@ -4,6 +4,9 @@ namespace view\topic\detail;
 
 function index($topic, $comments)
 {
+
+    $comments = escape($comments);
+
     \partials\topic_header_item($topic, false);
 ?>
     <ul class="list-unstyled">
