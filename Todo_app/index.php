@@ -1,9 +1,20 @@
 <?php
 require_once "config.php";
 
+//Model
+require_once SOURCE_BASE . "models/user.model.php";
+
+//DB
+require_once SOURCE_BASE . "db/datasource.php";
+require_once SOURCE_BASE . "db/user.query.php";
+
 require_once SOURCE_BASE . "partials/header.php";
 
-$rpath = str_replace(BASE_CONTEXT_PATH, "", ($_SERVER["REQUEST_URI"]));
+// use db\UserQuery;
+// $res = UserQuery::fetchById("test");
+// var_dump($res);
+
+$rpath = str_replace(BASE_CONTEXT_PATH, "", (CURRENT_URI));
 // str_replace()で第一引数を第二引数に置換する、対象となる値を第三引数に記載する
 // 今回では$_SERVER["REQUEST_URI"]内でBASE_CONTEXT_PATHと一致する部分を空文字に置換して$rpathに格納している
 

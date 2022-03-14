@@ -7,7 +7,19 @@ function get()
     require_once SOURCE_BASE . "views/login.php";
 }
 
+function login()
+{
+
+
+
+}
+
 function post()
 {
-    echo "POST method";
+
+    $id = isset($_POST["id"]) ?? "" ;
+    $pwd  = isset($_POST["pwd"]) ?? "";
+
+    $result = login($id, $pwd);
+
 }

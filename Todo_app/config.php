@@ -1,8 +1,8 @@
 <?php
 
-$uri = $_SERVER["REQUEST_URI"];
+define("CURRENT_URI", $_SERVER["REQUEST_URI"]);
 
-if (preg_match("/\/todo/", $uri, $match)) {
+if (preg_match("/\/todo/", CURRENT_URI, $match)) {
     define("BASE_CONTEXT_PATH", $match[0] ."/");
 }
 
