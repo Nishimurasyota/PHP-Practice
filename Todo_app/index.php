@@ -1,6 +1,10 @@
 <?php
 require_once "config.php";
 
+//Library
+require_once SOURCE_BASE . "libs/helper.php";
+require_once SOURCE_BASE . "libs/auth.php";
+
 //Model
 require_once SOURCE_BASE . "models/user.model.php";
 
@@ -8,11 +12,9 @@ require_once SOURCE_BASE . "models/user.model.php";
 require_once SOURCE_BASE . "db/datasource.php";
 require_once SOURCE_BASE . "db/user.query.php";
 
-require_once SOURCE_BASE . "partials/header.php";
+session_start();
 
-// use db\UserQuery;
-// $res = UserQuery::fetchById("test");
-// var_dump($res);
+require_once SOURCE_BASE . "partials/header.php";
 
 $rpath = str_replace(BASE_CONTEXT_PATH, "", (CURRENT_URI));
 // str_replace()で第一引数を第二引数に置換する、対象となる値を第三引数に記載する

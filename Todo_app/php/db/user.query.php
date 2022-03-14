@@ -10,7 +10,7 @@ class UserQuery
     public static function fetchByID($id)
     {
         $db = new DataSource;
-        $sql = "SELECT * FROM users u WHERE u.id = :id ";
+        $sql = 'select * from users where id = :id;';
         return $db->selectOne($sql, [
             ":id" => $id
         ], DataSource::CLS, UserModel::class);
