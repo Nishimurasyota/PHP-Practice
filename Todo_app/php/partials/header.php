@@ -11,12 +11,12 @@
 
 <body>
 
-<?php 
+    <?php
 
-use lib\Auth;
+    use lib\Auth;
 
-if(Auth::isLogin()){
-echo "ログイン中です";
-}else{
-    echo "ログインしていません";
-}
+    if (Auth::isLogin()) {
+        echo "ログイン中です";
+    } else {
+        echo "ログインしていません";
+    }

@@ -42,6 +42,7 @@ function route($rpath, $method)
 
     require_once $targetFile;
 
+
     $fn = "\\controller\\{$rpath}\\{$method}";
     $fn();
 }
