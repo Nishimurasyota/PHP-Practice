@@ -16,6 +16,9 @@ function post()
     $id = get_param("id", "");
     $pwd  = get_param("pwd", "");
 
+
+    Msg::push(Msg::DEBUG, "デバックメッセージです");
+
     if (Auth::login($id, $pwd)) {
         Msg::push(Msg::INFO, "ログイン成功");
         redirect(GO_HOME);
