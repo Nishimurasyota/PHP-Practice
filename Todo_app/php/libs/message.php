@@ -31,6 +31,17 @@ class Msg extends AbstractModel
         static::setSession($msgs);
     }
 
+    public static function flush()
+    {
+        $msgs_with_type = static::getSession() ?? [];
+
+        foreach ($msgs_with_type as $type => $msgs) {
+            foreach ($msgs as $msg) {
+                echo "<div>{$type}：{$msg}</div>";
+            }
+        }
+    }
+
     private static function init()
     {
         static::setSession([
