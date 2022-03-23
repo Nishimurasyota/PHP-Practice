@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace controller\register;
 
@@ -6,7 +6,8 @@ use model\UserModel;
 
 use lib\Auth;
 
-function get(){
+function get()
+{
     require_once SOURCE_BASE . "views/register.php";
 }
 
