@@ -26,4 +26,17 @@ abstract class AbstractModel
         static::setSession(null);
     }
 
+    /**
+     * セッションを取得した後に空にする関数
+     *
+     * @return void
+     */
+    public static function getSessionAndFlush()
+    {
+        try {
+            return static::getSession();
+        } finally {
+            static::clearSession();
+        }
+    }
 }
