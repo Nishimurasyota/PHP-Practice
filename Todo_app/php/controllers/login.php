@@ -16,10 +16,10 @@ function post()
     $pwd  = get_param("pwd", "");
 
     if (Auth::login($id, $pwd)) {
-        echo "認証成功";
+        echo "ログイン成功";
         redirect(GO_HOME);
     } else {
-        echo "認証失敗";
+        echo "ログイン失敗";
         redirect(GO_REFERER);
     }
 }
