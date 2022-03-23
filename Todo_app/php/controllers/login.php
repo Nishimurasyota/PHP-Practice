@@ -3,6 +3,7 @@
 namespace controller\login;
 
 use lib\Auth;
+use lib\Msg;
 
 function get()
 {
@@ -16,10 +17,10 @@ function post()
     $pwd  = get_param("pwd", "");
 
     if (Auth::login($id, $pwd)) {
-        echo "ログイン成功";
+        Msg::push(Msg::INFO, "ログイン成功");
         redirect(GO_HOME);
     } else {
-        echo "ログイン失敗";
+        Msg::push(Msg::ERROR, "ログイン失敗");
         redirect(GO_REFERER);
     }
 }

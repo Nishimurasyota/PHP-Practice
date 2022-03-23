@@ -21,7 +21,7 @@ abstract class AbstractModel
         return $_SESSION[static::$SESSION_NAME] ?? null;
     }
 
-    public static function clearSession($val)
+    public static function clearSession()
     {
         static::setSession(null);
     }
