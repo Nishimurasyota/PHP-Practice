@@ -7,6 +7,7 @@ require_once SOURCE_BASE . "models/user.model.php";
 
 //Library
 require_once SOURCE_BASE . "libs/helper.php";
+require_once SOURCE_BASE . "libs/router.php";
 require_once SOURCE_BASE . "libs/auth.php";
 require_once SOURCE_BASE . "libs/message.php";
 
@@ -14,7 +15,7 @@ require_once SOURCE_BASE . "libs/message.php";
 require_once SOURCE_BASE . "db/datasource.php";
 require_once SOURCE_BASE . "db/user.query.php";
 
-use function lib\routes;
+use function lib\route;
 
 session_start();
 
