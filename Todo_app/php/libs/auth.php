@@ -12,11 +12,11 @@ class Auth
     {
         try {
 
-            if (
-                !(UserModel::validateId($id) * !UserModel::validatePwd($pwd))
-            ) {
+            if (!(UserModel::validateId($id)
+                * UserModel::validatePwd($pwd))) {
                 return false;
             }
+
 
             $is_success = false;
 
@@ -27,10 +27,10 @@ class Auth
                     $is_success = true;
                     UserModel::setSession($user);
                 } else {
-                    echo "パスワードが一致しません";
+                    Msg::push(Msg::ERROR, "パスワードが一致しません");
                 }
             } else {
-                echo "IDが一致しません";
+                Msg::push(Msg::ERROR, "IDが一致しません");
             }
         } catch (Throwable $e) {
 
@@ -58,7 +58,7 @@ class Auth
             $exist_user = UserQuery::fetchById($user->id);
 
             if (!empty($exist_user)) {
-                echo "ユーザーが既に存在します";
+                Msg::push(Msg::ERROR, "ユーザーが既に存在します");
                 return false;
             }
 

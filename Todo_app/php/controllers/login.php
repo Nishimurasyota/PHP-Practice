@@ -4,6 +4,7 @@ namespace controller\login;
 
 use lib\Auth;
 use lib\Msg;
+use model\UserModel;
 
 function get()
 {
@@ -16,14 +17,11 @@ function post()
     $id = get_param("id", "");
     $pwd  = get_param("pwd", "");
 
-
-    Msg::push(Msg::DEBUG, "デバックメッセージです");
-
     if (Auth::login($id, $pwd)) {
-        Msg::push(Msg::INFO, "ログイン成功");
+        $user = UserModel::getSession();
+        Msg::push(Msg::INFO, "{$user->nickname}さん、ようこそ");
         redirect(GO_HOME);
     } else {
-        Msg::push(Msg::ERROR, "ログイン失敗");
         redirect(GO_REFERER);
     }
 }

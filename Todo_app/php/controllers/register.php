@@ -5,6 +5,7 @@ namespace controller\register;
 use model\UserModel;
 
 use lib\Auth;
+use lib\Msg;
 
 function get()
 {
@@ -21,9 +22,8 @@ function post()
 
     if (Auth::regist($user)) {
         redirect(GO_HOME);
-        echo "登録成功";
+        Msg::push(Msg::INFO, "{$user->nickname}さん、ようこそ");
     } else {
         redirect(GO_REFERER);
-        echo "登録失敗";
     }
 }
