@@ -28,6 +28,6 @@ function route($rpath, $method)
     } catch (throwable $e) {
         Msg::push(Msg::DEBUG, $e->getMessage());
         Msg::push(Msg::ERROR, "何かがおかしいようです");
-        redirect("404");
+        require_once SOURCE_BASE . "/views/404.php";
     }
 }
