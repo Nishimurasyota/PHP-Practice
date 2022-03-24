@@ -11,6 +11,13 @@ class Auth
     public static function login($id, $pwd)
     {
         try {
+
+            if (
+                !(UserModel::validateId($id) * !UserModel::validatePwd($pwd))
+            ) {
+                return false;
+            }
+
             $is_success = false;
 
             $user = UserQuery::fetchById($id);
@@ -39,7 +46,11 @@ class Auth
     {
         try {
             // validateIDがfalseで返ってきた場合の処理
-            if (!$user->isValidId()) {
+            if (
+                !($user->isValidId()
+                    * $user->isValidPwd()
+                    * $user->isValidNickname())
+            ) {
                 return false;
             }
             $is_success = false;
