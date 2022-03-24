@@ -29,7 +29,7 @@ class UserModel extends AbstractModel
                 Msg::push(Msg::ERROR, "IDは10文字以内で入力してください");
                 $res = false;
             }
-            if (!preg_match("/^[a-zA-Z0-9]+$/", $val)) {
+            if (!is_alnum($val)) {
                 Msg::push(Msg::ERROR, "IDは半角英数字で入力してください");
                 $res = false;
             }
