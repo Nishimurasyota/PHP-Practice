@@ -38,6 +38,10 @@ class Auth
     public static function regist($user)
     {
         try {
+            // validateIDがfalseで返ってきた場合の処理
+            if (!$user->isValidId()) {
+                return false;
+            }
             $is_success = false;
 
             $exist_user = UserQuery::fetchById($user->id);
